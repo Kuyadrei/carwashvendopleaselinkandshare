@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will you be my Valentine?</title>
+  <style>
+    body{
+      margin:0; height:100vh; display:flex; align-items:center; justify-content:center;
+      font-family: Arial, sans-serif; background: linear-gradient(135deg,#ff5ea8,#ffd1dc);
+      overflow:hidden;
+    }
+    .card{
+      background: rgba(255,255,255,.92);
+      padding: 28px 26px;
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.18);
+      text-align:center;
+      width:min(420px, 92vw);
+    }
+    h1{ margin:0 0 18px; font-size: 28px; letter-spacing:.5px; }
+    .btns{ display:flex; gap:14px; justify-content:center; margin-top:18px; flex-wrap:wrap; }
+    button{
+      border:0; padding: 12px 18px; border-radius: 12px; font-size: 16px; cursor:pointer;
+    }
+    #yes{ background:#22c55e; color:white; }
+    #no{ background:#ef4444; color:white; position:relative; }
+    .msg{ margin-top:18px; font-size:18px; font-weight:700; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>💘 WILL YOU BE MY VALENTINE? 💘</h1>
+    <div class="btns">
+      <button id="yes">YES</button>
+      <button id="no">NO</button>
+    </div>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('no');
+    const yesBtn = document.getElementById('yes');
+    const msg = document.getElementById('msg');
+
+    function moveNoButton() {
+      const padding = 20;
+
+      const btnRect = noBtn.getBoundingClientRect();
+      const maxX = window.innerWidth - btnRect.width - padding;
+      const maxY = window.innerHeight - btnRect.height - padding;
+
+      const x = Math.max(padding, Math.floor(Math.random() * maxX));
+      const y = Math.max(padding, Math.floor(Math.random() * maxY));
+
+      // move anywhere on screen
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
+
+    // For desktop mouse
+    noBtn.addEventListener('mouseenter', moveNoButton);
+
+    // For mobile/touch (when they try to tap)
+    noBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      moveNoButton();
+    }, { passive: false });
+
+    yesBtn.addEventListener('click', () => {
+      msg.textContent = "YAY!! 💖 See you on our date 😘";
+    });
+  </script>
+</body>
+</html>
